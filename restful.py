@@ -8,6 +8,10 @@ languages = [{'name': 'Javascript'}, {'name': 'Ruby'}, {'name': 'Python'}]
 def test():
     return jsonify({'message': 'It works!'})
 
+@app.route('/languages', methods=['GET'])
+def returnAll():
+    return jsonify({'languages': languages})
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
