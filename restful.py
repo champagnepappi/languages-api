@@ -26,7 +26,9 @@ def addOne():
 @app.route('/languages/<string:name>', methods=['PUT'])
 def editOne(name):
     langs = [language for language in languages if language['name'] == name]
-    langs[0]['name'] = request.json['name']
+    if not request.json:
+        abort(404)
+    langs[0]['name'] = request.json.get('name', langs[0]['name'])
     return jsonify({'language': langs[0]})
 
 @app.route('/languages/<string:name>', methods=['DELETE'])
